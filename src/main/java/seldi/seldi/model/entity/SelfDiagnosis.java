@@ -25,6 +25,8 @@ public class SelfDiagnosis {
 
     private String content;
 
+    private int level;
+
     @ManyToOne
     private User userId;
 }
