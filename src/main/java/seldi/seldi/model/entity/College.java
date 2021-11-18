@@ -25,8 +25,6 @@ public class College {
 
     private String longitude;
 
-    private String radius;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "collegeId")
     private List<User> userList = new ArrayList<>();
 
