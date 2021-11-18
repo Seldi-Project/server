@@ -9,6 +9,7 @@ import seldi.seldi.model.repository.CollegeRepository;
 import seldi.seldi.model.repository.UserRepository;
 import seldi.seldi.model.request.RegisterApiRequest;
 import seldi.seldi.model.response.LoginResponse;
+import seldi.seldi.model.response.UserProfileResponse;
 
 @Service
 public class UserService {
@@ -56,5 +57,20 @@ public class UserService {
                 .studentNum(user.getStudentNum())
                 .build();
 
+    }
+
+    public UserProfileResponse getProfile(String email) {
+        User user = userRepository.findByEmail(email);
+
+        return UserProfileResponse.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .collegeName(user.getCollegeId().getCollegeName())
+                .image(user.getImage())
+                .studentNum(user.getStudentNum())
+                .phoneNum(user.getPhoneNum())
+                .firstVaccination(user.isFirstVaccination())
+                .secondVaccination(user.isSecondVaccination())
+                .build();
     }
 }

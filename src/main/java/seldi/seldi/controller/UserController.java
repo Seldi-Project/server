@@ -5,10 +5,11 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import seldi.seldi.model.Header;
-import seldi.seldi.model.entity.User;
 import seldi.seldi.service.UserService;
 
 @RestController
@@ -20,15 +21,14 @@ public class UserController {
 
     @ApiOperation(value = "유저 프로필 조회 api")
     @GetMapping("/userProfile")
-    public void getProfile() {
+    public Header getProfile() {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String email = ((User) auth.getPrincipal()).getUsername();
-            System.out.println(email);
+            return Header.OK(userService.getProfile(email), "유저 프로필 조회");
         }
         catch(Exception e) {
-//            return Header.ERROR("로그인이 필요합니다.");
-            System.out.println("error");
+            return Header.ERROR("로그인이 필요합니다.");
         }
     }
 }
