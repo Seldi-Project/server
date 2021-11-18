@@ -16,13 +16,13 @@ import seldi.seldi.model.request.ProfileUpdateRequest;
 import seldi.seldi.service.UserService;
 
 @RestController
-@Api(tags = "유저 프로필 조회 & 수정 & ...")
+@Api(tags = "유저 백신여부 api")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "유저 프로필 조회 api")
+    @ApiOperation(value = "유저 백신여부 조회 api")
     @GetMapping("/userProfile")
     public Header getProfile() {
         try {
@@ -35,7 +35,7 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "유저 프로필 수정 api")
+    @ApiOperation(value = "유저 백신여부 등록 api")
     @PutMapping("/userProfile/update")
     public Header updateProfile(@RequestBody ProfileUpdateRequest profileUpdateRequest) {
         try {

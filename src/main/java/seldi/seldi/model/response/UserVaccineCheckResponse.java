@@ -1,4 +1,4 @@
-package seldi.seldi.model.request;
+package seldi.seldi.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProfileUpdateRequest {
+public class UserVaccineCheckResponse {
 
     private String email;
 
-    private Boolean firstVaccination;
+    private boolean firstVaccination;
 
-    private Boolean secondVaccination;
+    private boolean secondVaccination;
 
 }

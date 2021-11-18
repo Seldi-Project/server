@@ -11,6 +11,7 @@ import seldi.seldi.model.request.ProfileUpdateRequest;
 import seldi.seldi.model.request.RegisterApiRequest;
 import seldi.seldi.model.response.LoginResponse;
 import seldi.seldi.model.response.UserProfileResponse;
+import seldi.seldi.model.response.UserVaccineCheckResponse;
 
 @Service
 public class UserService {
@@ -66,35 +67,19 @@ public class UserService {
         User user = userRepository.findByEmail(email);
 
         return UserProfileResponse.builder()
-                .email(user.getEmail())
-                .name(user.getName())
-                .nickName(user.getNickName())
-                .collegeName(user.getCollegeId().getCollegeName())
-                .image(user.getImage())
-                .studentNum(user.getStudentNum())
-                .phoneNum(user.getPhoneNum())
                 .firstVaccination(user.isFirstVaccination())
                 .secondVaccination(user.isSecondVaccination())
                 .build();
     }
 
-    public UserProfileResponse updateProfile(ProfileUpdateRequest profileUpdateRequest) {
+    public UserVaccineCheckResponse updateProfile(ProfileUpdateRequest profileUpdateRequest) {
         User user = userRepository.findByEmail(profileUpdateRequest.getEmail());
-        user.setNickName(profileUpdateRequest.getNickName())
-                .setImage(profileUpdateRequest.getImage())
-                .setPhoneNum(profileUpdateRequest.getPhoneNum())
-                .setFirstVaccination(profileUpdateRequest.getFirstVaccination())
+        user.setFirstVaccination(profileUpdateRequest.getFirstVaccination())
                 .setSecondVaccination(profileUpdateRequest.getSecondVaccination());
         userRepository.save(user);
 
-        return UserProfileResponse.builder()
+        return UserVaccineCheckResponse.builder()
                 .email(user.getEmail())
-                .name(user.getName())
-                .nickName(user.getNickName())
-                .collegeName(user.getCollegeId().getCollegeName())
-                .image(user.getImage())
-                .studentNum(user.getStudentNum())
-                .phoneNum(user.getPhoneNum())
                 .firstVaccination(user.isFirstVaccination())
                 .secondVaccination(user.isSecondVaccination())
                 .build();
