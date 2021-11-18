@@ -8,6 +8,7 @@ import seldi.seldi.model.entity.User;
 import seldi.seldi.model.repository.CollegeRepository;
 import seldi.seldi.model.repository.UserRepository;
 import seldi.seldi.model.request.RegisterApiRequest;
+import seldi.seldi.model.response.LoginResponse;
 
 @Service
 public class UserService {
@@ -43,5 +44,17 @@ public class UserService {
                 .build();
 
         return userRepository.save(user);
+    }
+
+    public LoginResponse login(String generateToken, String email) {
+        User user = userRepository.findByEmail(email);
+        return LoginResponse.builder()
+                .jwtToken(generateToken)
+                .email(user.getEmail())
+                .name(user.getName())
+                .image(user.getImage())
+                .studentNum(user.getStudentNum())
+                .build();
+
     }
 }
