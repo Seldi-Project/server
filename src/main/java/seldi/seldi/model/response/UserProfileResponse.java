@@ -15,6 +15,8 @@ public class UserProfileResponse {
 
     private String name;
 
+    private String nickName;
+
     private String collegeName;
 
     private String studentNum;

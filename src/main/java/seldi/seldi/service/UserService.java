@@ -7,6 +7,7 @@ import seldi.seldi.model.entity.College;
 import seldi.seldi.model.entity.User;
 import seldi.seldi.model.repository.CollegeRepository;
 import seldi.seldi.model.repository.UserRepository;
+import seldi.seldi.model.request.ProfileUpdateRequest;
 import seldi.seldi.model.request.RegisterApiRequest;
 import seldi.seldi.model.response.LoginResponse;
 import seldi.seldi.model.response.UserProfileResponse;
@@ -39,6 +40,7 @@ public class UserService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
+                .nickName("익명의 유저")
                 .collegeId(college)
                 .phoneNum(request.getPhoneNum())
                 .studentNum(request.getStudentNum())
@@ -55,6 +57,7 @@ public class UserService {
                 .name(user.getName())
                 .image(user.getImage())
                 .studentNum(user.getStudentNum())
+                .nickName(user.getNickName())
                 .build();
 
     }
@@ -65,6 +68,7 @@ public class UserService {
         return UserProfileResponse.builder()
                 .email(user.getEmail())
                 .name(user.getName())
+                .nickName(user.getNickName())
                 .collegeName(user.getCollegeId().getCollegeName())
                 .image(user.getImage())
                 .studentNum(user.getStudentNum())
@@ -72,5 +76,28 @@ public class UserService {
                 .firstVaccination(user.isFirstVaccination())
                 .secondVaccination(user.isSecondVaccination())
                 .build();
+    }
+
+    public UserProfileResponse updateProfile(ProfileUpdateRequest profileUpdateRequest) {
+        User user = userRepository.findByEmail(profileUpdateRequest.getEmail());
+        user.setNickName(profileUpdateRequest.getNickName())
+                .setImage(profileUpdateRequest.getImage())
+                .setPhoneNum(profileUpdateRequest.getPhoneNum())
+                .setFirstVaccination(profileUpdateRequest.getFirstVaccination())
+                .setSecondVaccination(profileUpdateRequest.getSecondVaccination());
+        userRepository.save(user);
+
+        return UserProfileResponse.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .nickName(user.getNickName())
+                .collegeName(user.getCollegeId().getCollegeName())
+                .image(user.getImage())
+                .studentNum(user.getStudentNum())
+                .phoneNum(user.getPhoneNum())
+                .firstVaccination(user.isFirstVaccination())
+                .secondVaccination(user.isSecondVaccination())
+                .build();
+
     }
 }

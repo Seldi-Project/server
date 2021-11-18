@@ -25,6 +25,8 @@ public class User implements UserDetails {
 
     private String name;
 
+    private String nickName;
+
     private String studentNum;
 
     private String phoneNum;
