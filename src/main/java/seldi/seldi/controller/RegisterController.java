@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-@Api(tags = "이메일 인증과 가입")
+@Api(tags = "이메일 인증과 가입 ")
 public class RegisterController {
 
     @Autowired
