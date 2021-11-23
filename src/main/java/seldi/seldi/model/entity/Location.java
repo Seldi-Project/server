@@ -13,22 +13,22 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @Accessors(chain = true)
-@ToString(exclude = {"userId", "collegeSectorId"})
+@ToString(exclude = {"userId", "collegeId"})
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
 
-    private LocalDateTime time;
+    private String time;
 
     private String latitude;
 
     private String longitude;
 
+    private Long collegeId;
+
     @ManyToOne
     private User userId;
 
-    @ManyToOne
-    private CollegeSector collegeSectorId;
 }

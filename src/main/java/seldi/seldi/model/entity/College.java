@@ -28,8 +28,6 @@ public class College {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "collegeId")
     private List<User> userList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "collegeId")
-    private List<CollegeSector> collegeSectorList = new ArrayList<>();
 
 
 }

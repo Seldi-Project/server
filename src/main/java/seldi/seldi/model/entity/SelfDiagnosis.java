@@ -14,14 +14,13 @@ import java.time.LocalDateTime;
 @Builder
 @Accessors(chain = true)
 @ToString(exclude = {"userId"})
-
 public class SelfDiagnosis {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long diagnosisId;
 
-    private LocalDateTime diagnosisDate;
+    private String diagnosisDate;
 
     private String content;
 
